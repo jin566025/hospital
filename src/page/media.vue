@@ -22,7 +22,7 @@
 		data(){
 			return {
 				MaterialList:[
-					{title:"这是测试的title",summary:"这是测试的summary",img:""}
+//					{title:"这是测试的title",summary:"这是测试的summary",img:""}
 				]
 			}
 		},

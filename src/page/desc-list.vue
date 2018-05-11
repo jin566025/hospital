@@ -29,7 +29,7 @@
 		data(){
 			return {
 				list:[
-					{name:"比没风",job:"主任已是",department:"儿科",outpatientTime:"周二"}
+//					{name:"比没风",job:"主任已是",department:"儿科",outpatientTime:"周二"}
 				]
 			}
 		},
@@ -47,10 +47,14 @@
 					},
 					dataType:"json"
 				}).then((res)=>{
+					console.log(res)
 					if(res){
 			 			var data = res.data;
 			 			this.list = data.list;
+			 			console.log(data)
 			 		}
+				},(err)=>{
+					console.log(err)
 				})
 			}
 		}

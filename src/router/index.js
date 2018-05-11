@@ -109,14 +109,14 @@ export default new Router({
   		path: '/recruit',
   		component: Recruit,
   		meta: {
-        title: '招聘启事'
+        title: '招聘启示'
       }
   	},
   	{
   		path: '/recruit-detail',
   		component: RecruitDetail,
   		meta: {
-        title: '招聘启事详情'
+        title: '招聘启示详情'
       }
   	},
   	{

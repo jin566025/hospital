@@ -13,6 +13,27 @@
 	export default{
 		components:{
 			MyMap
+		},
+		created(){
+			this.getTrafficInfo();
+		},
+		methods:{
+			toList:function(index){
+				var title = this.typeList[index];
+				document.title = title;
+				this.$router.push({path:'/feature-detail'})
+			},
+			getTrafficInfo:function(){
+				this.$ajax({
+					type:"post",
+					url:this.url_path+"/getTrafficInfo.json",
+					dataType:"json"
+				}).then((res)=>{
+			 		console.log(res)
+			 	},(err)=>{
+					console.log(err)
+				})
+			}
 		}
 	}
 </script>

@@ -1,20 +1,21 @@
 <template>
 	<div>
-		<div class="section" v-for="(item,index) in list" @click="toDetail(index)">
+		<div class="section" v-for="(item,index) in list" @click="toDetail(item.id)">
 			<div class="section-content flex-box">
-				<img class="section-left" :src="item.img" />
+				<img class="section-left" :src="item.headImg ? item.headImg:'./static/img/morentouxiang1.png'" />
+				<img src="" />
 				<div class="section-right">
 					<p class="section-p2">
 						<a class="name">{{ item.name }}</a>
-						<a>{{ item.type }}</a>
+						<a>{{ item.job }}</a>
 					</p>
 					<p class="section-p">
 						<a>科室：</a>
-						<a>{{ item.type2 }}</a>
+						<a>{{ item.department }}</a>
 					</p>
 					<p class="section-p">
 						<a>门诊时间：</a>
-						<a>{{ item.time }}</a>
+						<a>{{ item.outpatientTime }}</a>
 					</p>
 				</div>
 			</div>
@@ -28,18 +29,29 @@
 		data(){
 			return {
 				list:[
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"},
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"},
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"},
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"},
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"},
-					{name:"徐佩莉",img:"../../static/img/test.jpg",type:"主任中医师",type2:"儿科",time:"周四上午"}
+					{name:"比没风",job:"主任已是",department:"儿科",outpatientTime:"周二"}
 				]
 			}
 		},
 		methods:{
-			toDetail:function(index){
-				this.$router.push({path:'/desc-detail'})
+			toDetail:function(id){
+				this.$router.push({path:'/desc-detail?id='+id})
+			},
+			getDoctorList:function(){
+				var id = window.location.href.split("=")[1];
+				$ajax({
+					type:"post",
+					url:url_path+"/getDoctorList.json",
+					data:{
+						"departmentTypeId":id
+					},
+					dataType:"json"
+				}).then((res)=>{
+					if(res){
+			 			var data = res.data;
+			 			this.list = data.list;
+			 		}
+				})
 			}
 		}
 	}

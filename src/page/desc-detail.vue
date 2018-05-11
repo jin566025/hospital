@@ -30,6 +30,27 @@
 </template>
 
 <script>
+	export default{
+		created(){
+			this.getDoctorList();
+		},
+		methods:{
+			getDoctorList:function(){
+				this.$ajax({
+					type:"post",
+					url:this.url_path+"/getDoctorList.json",
+					params:{
+						departmentTypeId:1
+					},
+					dataType:"json"
+				}).then((res)=>{
+			 		console.log(res)
+			 	},(err)=>{
+					console.log(err)
+				})
+			}
+		}
+	}
 </script>
 
 
@@ -65,6 +86,6 @@
 		.desc-detail-icon{width: 2rem;height: 2rem;text-align: left;vertical-align: middle;margin-right: 1rem;}
 		.desc-detail-a{vertical-align: middle;font-size: 1.2rem;}
 	}
-	.desc-detail-p{width:90%;font-size: 1rem;padding: 1rem 0;margin: 0 auto;line-height: 1.8rem;}
+	.desc-detail-p{width:90%;font-size: 1rem;padding: 1rem 0;margin: 0 auto;line-height: 1.8rem;letter-spacing: 2px;}
 }
 </style>

@@ -56,12 +56,12 @@
 	font-size: 1.3rem;color: #000000;font-family: arial;width: 90%;margin: 0 auto;
 	.title{padding: 2rem 0;}
 	.section{
-		width: 100%;padding: 0.3rem 0;
-		.section-left{margin-right: 1rem;padding:0.3rem 0;}
+		width: 100%;padding: 0.2rem 0;
+		.section-left{margin-right: 1rem;padding:0.2rem 0;}
 		.section-right{
 			flex: 1;
 			p{
-				padding:0.3rem 0;
+				padding:0.2rem 0;
 				.name{margin-left: 1rem;}
 			}
 			

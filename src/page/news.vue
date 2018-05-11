@@ -1,7 +1,18 @@
 <template>
 	<div>
 		<banner></banner>
-		<div class="section" @click="toDetail()">
+		<div class="section" @click="toDetail(index)" v-for="(item,index) in MaterialList">
+			<div class="section-content  flex-box">
+				<div class="section-left">
+					<img class="head" :src="item.img" />
+				</div>
+				<div class="section-right">
+					<p class="title">{{ item.title }}</p>
+					<p class="detail">{{ item.summary }}</p>
+				</div>
+			</div>
+		</div>
+		<div class="section">
 			<div class="section-content  flex-box">
 				<img class="section-left"  src="../../static/img/stop.png" />
 				<div class="section-right">
@@ -11,16 +22,7 @@
 			</div>
 			
 		</div>
-		<div class="section">
-			<div class="section-content  flex-box">
-				<img class="section-left"  src="../../static/img/stop.png" />
-				<div class="section-right">
-					<p class="title">【预告】这朵云不容小觑！我院“影像云”即将上线，开启数字化智能数字化智能</p>
-					<p class="detail">2018年01月12日</p>
-				</div>
-			</div>
-			
-		</div>
+
 	</div>
 </template>
 
@@ -28,14 +30,33 @@
 <script>
 	import Banner from '../components/banner'
 	export default{
+		data(){
+			return {
+				MaterialList:[]
+			}
+		},
 		methods:{
-			toDetail:function(){
-				this.$router.push({path:'/news-detail'})
+			
+			getMaterialList:function(){
+				this.$ajax({
+					type:"post",
+					dataType:"json",
+					params:{
+						"typeId":5
+					},
+					url:this.url_path+"/getMaterialList.json"
+				}).then((res)=>{
+					var data = res.data;
+					this.MaterialList = data.list;
+				})
 			}
 		},
 		components:{
 			Banner
-		}
+		},
+		created(){
+			this.getMaterialList()
+		},
 	}
 </script>
 <style lang="less" rel="stylesheet/less" scoped>

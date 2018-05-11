@@ -14,6 +14,14 @@
 	export default{
 		components:{
 			Banner
+		},
+		created(){
+			this.getHospitalInfo();
+		},
+		methods:{
+			getHospitalInfo:function(){
+				
+			}
 		}
 	}
 </script>
@@ -22,6 +30,6 @@
 
 .container{
 	width: 92%;margin: 0 auto;margin-top: 1rem;
-	p{font-size: 1.3333rem;color: rgb(51, 51, 51);font-family: arial;text-indent: 2em;line-height: 2rem;}
+	p{font-size: 1.25rem;color: #000000;font-family: arial;text-indent: 2em;line-height: 2rem;}
 }
 </style>

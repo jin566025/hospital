@@ -35,6 +35,17 @@
 </template>
 
 <script>
+	export default{
+		methods:{
+			getMaterialInfo:function(){
+				var id = window.location.href.split("=")[1];
+				
+			}
+		},
+		created(){
+			this.getMaterialInfo()
+		}
+	}
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>

@@ -7,7 +7,7 @@
 				<div class="title-left">1、</div>
 				<div class="title-right">挂号时间：</div>
 			</div>
-			<p class="detail">上午7：30——11：30下午13：15——17：00</p>
+			<p class="detail">上午7：30—11：30下午13：15—17：00</p>
 			<div class="title flex-box">
 				<div class="title-left">2、</div>
 				<div class="title-right">挂号费用：</div>
@@ -43,6 +43,22 @@
 	export default{
 		components:{
 			Banner
+		},
+		created(){
+			this.getOutpatinetInfo();
+		},
+		methods:{
+			getOutpatinetInfo:function(){
+				this.$ajax({
+					type:"post",
+					url:this.url_path+"/getOutpatinetInfo.json",
+					dataType:"json"
+				}).then((res)=>{
+			 		console.log(res)
+			 	},(err)=>{
+					console.log(err)
+				})
+			}
 		}
 	}
 </script>
@@ -50,7 +66,7 @@
 <style lang="less" rel="stylesheet/less" scoped>
 
 .container{
-	width: 92%;margin: 0 auto;margin-top: 1rem;font-family: arial;font-weight: 500;color: #000000;font-size: 1.2rem;
+	line-height: 2rem;width: 92%;margin: 0 auto;margin-top: 1rem;font-family: arial;font-weight: 500;color: #000000;font-size: 1.25rem;
 	.tip{font-size: 1.5rem;margin-bottom: 1.6rem;margin-top: 1.4rem;}
 	.title{
 		margin-top: 0.4rem;

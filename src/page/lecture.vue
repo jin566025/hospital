@@ -1,30 +1,20 @@
 <template>
 	<div>
 		<banner></banner>
-		<div class="section" @click="toDetail()">
+		<div class="section" @click="toDetail(index)" v-for="(item,index) in MaterialList">
 			<div class="section-content  flex-box">
 				<div class="section-left">
-					<img class="head" src="../../static/img/test.jpg" />
+					<div class="head"  :style="item.img ? {backgroundImage: 'url(' + item.img+ ')'} : {backgroundImage: 'url(./static/img/morentouxiang.png)'}" ></div>
+				
 				</div>
 				<div class="section-right">
-					<p class="title">中西医结合科系列讲座（一）</p>
-					<p class="detail">开展中西医结合科肿瘤特色门诊，具体分为乳腺癌、肺癌、胃肠道肿瘤、妇科肿瘤、肝胆肿瘤科</p>
+					<p class="title">{{ item.title }}</p>
+					<p class="detail">{{ item.summary }}</p>
 				</div>
 			</div>
 			
 		</div>
-		<div class="section">
-			<div class="section-content  flex-box">
-				<div class="section-left">
-					<img class="head" src="../../static/img/test.jpg" />
-				</div>
-				<div class="section-right">
-					<p class="title">中西医结合科系列讲座（二）</p>
-					<p class="detail">开展中西医结合科肿瘤特色门诊，具体分为乳腺癌、肺癌、胃肠道肿瘤、妇科肿瘤、肝胆肿瘤科</p>
-				</div>
-			</div>
-			
-		</div>
+	
 	</div>
 </template>
 
@@ -32,10 +22,32 @@
 <script>
 	import Banner from '../components/banner'
 	export default{
-		methods:{
-			toDetail:function(){
-				this.$router.push({path:'/lecture-detail'})
+		data(){
+			return {
+				MaterialList:[]
 			}
+		},
+		methods:{
+			
+			getMaterialList:function(){
+				this.$ajax({
+					type:"post",
+					dataType:"json",
+					params:{
+						"typeId":2
+					},
+					url:this.url_path+"/getMaterialList.json"
+				}).then((res)=>{
+					if(res){
+						var data = res.data;
+						this.MaterialList = data.list;
+						console.log(this.MaterialList)
+					}
+				})
+			}
+		},
+		created(){
+			this.getMaterialList()
 		},
 		components:{
 			Banner
@@ -43,13 +55,14 @@
 	}
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
+
 .section{
 	width: 100%;padding: 1rem 0;border-bottom: 1px solid gainsboro;
 	.section-content{
 		width: 90%;margin: 0 auto;align-items: center;
 		.section-left{
 			width: 8rem;height:8rem;background: url(../../static/img/keshitese.png) no-repeat center/contain;position: relative;
-			.head{width:5.4rem;height: 4rem;position: absolute;left: 1rem;bottom: 1rem;}
+			.head{width:5.4rem;height:3.4rem;position: absolute;left: 1rem;bottom: 1.4rem;background-repeat: no-repeat;background-position: center;background-size: contain;}
 		}
 		.section-right{
 			flex: 1;padding-left: 0.4rem;

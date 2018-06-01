@@ -1,10 +1,12 @@
 <template>
 	<div>
-		<banner></banner>
-		<div class="section" @click="toDetail(index)" v-for="(item,index) in MaterialList">
+		<my-swiper :listImg="swiperImg"></my-swiper>
+		<div class="section" @click="toDetail(item.id)" v-for="(item,index) in MaterialList">
 			<div class="section-content  flex-box">
 				<div class="section-left">
-					<div class="head"  :style="item.img ? {backgroundImage: 'url(' + item.img+ ')'} : {backgroundImage: 'url(./static/img/morentupian.png)'}" ></div>
+					<div class="head">
+						<img class="headimg" :src="item.img ? imgurl+item.img:'./static/img/morentupian.png'" :onerror="errorImg01" />
+					</div>
 				</div>
 				<div class="section-right">
 					<p class="title">{{ item.title }}</p>
@@ -17,13 +19,15 @@
 
 
 <script>
-	import Banner from '../components/banner'
+	import MySwiper from '../components/my-swiper'
 	export default{
 		data(){
 			return {
+				swiperImg:["../static/img/banner.png"],
 				MaterialList:[
 //					{title:"这是测试的title",summary:"这是测试的summary",img:""}
-				]
+				],
+				errorImg01: 'this.onerror=null;this.src="./static/img/morentupian.png"'
 			}
 		},
 		methods:{
@@ -44,7 +48,7 @@
 			}
 		},
 		components:{
-			Banner
+			MySwiper
 		},
 		created(){
 			this.getMaterialList()
@@ -58,11 +62,14 @@
 		width: 90%;margin: 0 auto;align-items: center;
 		.section-left{
 			width: 8rem;height:8rem;background: url(../../static/img/keshitese.png) no-repeat center/contain;position: relative;
-			.head{width:5.4rem;height:3.4rem;position: absolute;left: 1rem;bottom: 1.4rem;background-repeat: no-repeat;background-position: center;background-size: contain;}
+			.head{
+				width:5.4rem;height:3.4rem;position: absolute;left: 1rem;bottom: 1.4rem;
+				.headimg{height: 3.4rem;margin: 0 auto;display: block;}
+			}
 		}
 		.section-right{
-			flex: 1;padding-left: 0.4rem;
-			.title{height: 2.4rem;line-height: 2.4rem;color: #000000;font-size: 1.2rem;}
+			width: calc(100% - 8rem);padding-left: 0.4rem;
+			.title{height: 2.4rem;line-height: 2.4rem;color: #000000;font-size: 1.2rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 			.detail{color: gray;font-size: 1rem;height: 3rem;overflow: hidden;line-height: 1.5rem;text-overflow: ellipsis;
 			display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}
 		}

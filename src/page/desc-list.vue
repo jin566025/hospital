@@ -2,10 +2,10 @@
 	<div>
 		<div class="section" v-for="(item,index) in list" @click="toDetail(item.id)">
 			<div class="section-content flex-box">
-				<img class="section-left" :src="item.headImg ? item.headImg:'./static/img/morentouxiang1.png'" />
-				<img src="" />
+				<img  :onerror="errorImg01" class="section-left" :src="item.headImg ? imgurl+item.headImg:'./static/img/circle4.png'"  />
 				<div class="section-right">
 					<p class="section-p2">
+						
 						<a class="name">{{ item.name }}</a>
 						<a>{{ item.job }}</a>
 					</p>
@@ -28,22 +28,24 @@
 	export default{
 		data(){
 			return {
-				list:[
-//					{name:"比没风",job:"主任已是",department:"儿科",outpatientTime:"周二"}
-				]
+				list:[],
+				errorImg01: 'this.onerror=null;this.src="./static/img/circle4.png"'
 			}
+		},
+		created(){
+			this.getDoctorList()
 		},
 		methods:{
 			toDetail:function(id){
 				this.$router.push({path:'/desc-detail?id='+id})
 			},
 			getDoctorList:function(){
-				var id = window.location.href.split("=")[1];
-				$ajax({
+				var id = window.location.href.split("id=")[1];
+				this.$ajax({
 					type:"post",
-					url:url_path+"/getDoctorList.json",
-					data:{
-						"departmentTypeId":id
+					url:this.url_path+"/getDoctorList.json",
+					params:{
+						"departmentId":id
 					},
 					dataType:"json"
 				}).then((res)=>{
@@ -51,12 +53,12 @@
 					if(res){
 			 			var data = res.data;
 			 			this.list = data.list;
-			 			console.log(data)
 			 		}
-				},(err)=>{
-					console.log(err)
 				})
 			}
+		},
+		watch:{
+			 "$route": "getDoctorList"
 		}
 	}
 </script>
@@ -68,7 +70,7 @@
 		width: 90%;margin: 0 auto;align-items: center;
 		.section-left{width: 6rem;height: 6rem;border-radius: 5px;}
 		.section-right{
-			flex: 1;padding-left: 1.5rem;color: gray;font-size: 1rem;
+			padding-left: 1.5rem;color: gray;font-size: 1rem;width: calc(100% - 6rem);
 			.section-p{height:1.6rem;line-height:1.6rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 			.section-p2 {
 				height:2.8rem;line-height:2.8rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;

@@ -17,7 +17,7 @@ import Media from '../page/media'
 import MediaDetail from '../page/media-detail'
 import Feature from '../page/feature'
 import FeatureDetail from '../page/feature-detail'
-import Map from '../page/map'
+
 import News from '../page/news'
 import NewsDetail from '../page/news-detail'
 Vue.use(Router)
@@ -26,7 +26,7 @@ export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/index',
+      component: Index,
       meta: {
         title: '首页'
       }
@@ -142,15 +142,12 @@ export default new Router({
   	},
   	{
   		path: '/feature-detail',
-  		component: FeatureDetail
-  	},
-  	{
-  		path: '/map',
-  		component:Map,
+  		component: FeatureDetail,
   		meta: {
-        title: '交通路线'
+        title: '科室特色'
       }
   	},
+
   	{
   		path: '/news',
   		component: News,
@@ -162,7 +159,7 @@ export default new Router({
   		path: '/news-detail',
   		component: NewsDetail,
   		meta: {
-        title: '新闻中心详情'
+        title: '新闻中心详情s'
       }
   	}
   ]

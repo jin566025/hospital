@@ -6,6 +6,35 @@
 </template>
 
 <script>
+	export default{
+		data(){
+			return {
+				datas:[]
+			}
+		},
+		created(){
+			this.getDepartmentInfo()
+		},
+		methods:{
+			getDepartmentInfo:function(){
+				var id = window.location.href.split("=")[1]
+				this.$ajax({
+					type:"post",
+					url:this.url_path+"/getDepartmentTypeList.json",
+					dataType:"json",
+					params:{
+						"departmentId":id
+					}
+				}).then((res)=>{
+					if(res){
+						var data = res.data;
+						console.log(data)
+					}
+					
+				})
+			}
+		}
+	}
 </script>
 
 <style lang="less" rel="stylesheet/less" scoped>

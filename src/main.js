@@ -14,9 +14,9 @@ Vue.prototype.$ajax = axios
 Vue.config.productionTip = false
 
 Vue.prototype.$ajax = axios
-Vue.prototype.url_path = "http://192.168.16.100:8080/LongHua/rest"
-Vue.prototype.toDetail = function(index){
-	var id = index+1
+Vue.prototype.url_path = "http://longhuaweb.nbjiakai.com:8484/LongHua/rest"
+Vue.prototype.imgurl = "http://longhuaweb.nbjiakai.com:8484"
+Vue.prototype.toDetail = function(id){
 	this.$ajax({
 		type:"post",
 		url:this.url_path+"/getMaterialInfo.json",
@@ -26,9 +26,18 @@ Vue.prototype.toDetail = function(index){
 		dataType:"json",
 	}).then((res)=>{
 		if(res){
+			
 			var data = res.data;
+			console.log(data.outUrl)
 			if(data.openway){
-				window.location.href=data.outUrl
+				var urls = data.outUrl;
+				var strs = "mp.weixin.qq.com";
+			 	if(urls.indexOf(strs)!=-1){
+			 		window.location.href=data.outUrl+"&scene=4#wechat_redirect"
+			 	}else{
+			 		window.location.href=data.outUrl
+			 	}
+
 			}
 		}
 	})

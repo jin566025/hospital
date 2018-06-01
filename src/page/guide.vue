@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<banner></banner>
+		<my-swiper :listImg="swiperImg"></my-swiper>
 		<div class="section" v-for="item in list">
 			<a class="text" :href="item.outUrl">{{ item.name }}</a>
 		</div>
@@ -8,15 +8,16 @@
 	</div>
 </template>
 <script>
-	import Banner from '../components/banner'
+	import MySwiper from '../components/my-swiper'
 	export default{
 		data(){
 			return {
+				swiperImg:["../static/img/banner.png"],
 				list:[]
 			}
 		},
 		components:{
-			Banner
+			MySwiper
 		},
 		created(){
 			this.getMedicalGuideList();

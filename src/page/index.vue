@@ -21,7 +21,8 @@
 
 <script>
 	import MySwiper from '../components/my-swiper'
-	import wx from 'weixin-js-sdk'
+	
+//	import wx from 'weixin-js-sdk'
 	export default {
 		data(){
 			return {
@@ -44,7 +45,29 @@
 		components:{
 			MySwiper
 		},
+		created(){
+			this.getAdList()
+		},
+		
 		methods:{
+			getAdList:function(){
+	    		this.$ajax({
+	    			type:"post",
+	    			url:this.url_path+"/getAdList.json",
+	    			dataType:"json",
+	    			params:{
+	    				"position":1,
+	    				"max":999
+	    			}
+	    		}).then((res)=>{
+	    			if(res.data.stateCode==0){
+	    				console.log(res)
+	    				var data = res.data;
+	    				this.swiperImg = data.list;
+	    			}
+	    		})
+	    	},
+
 			toDesc:function(){
 				this.$router.push({path:'/desc'})
 			},
@@ -107,97 +130,6 @@
 			},
 			toFenxian:function(){
 				this.maskshow = !this.maskshow
-			},
-			fenXiang:function(){
-			    var fxData = {  
-				    title: "龙华医院", // 分享标题  
-				    desc: "龙华医院", // 分享描述  
-				    link: "./static/img/banner.png", // 分享链接  
-				    imgUrl: "./static/img/banner.png", // 分享图标  
-				    type: 'link', // 分享类型,music、video或link，不填默认为link  
-				    dataUrl: '' // 如果type是music或video，则要提供数据链接，默认为空  
-			    };  
-			    $.post('请求后端配置文件信息', {url:fxData.link},function(re){  
-			    // console.log(re.data)  
-			    wx.config(re.data);  
-			    // console.log(fxData)  
-			    wx.ready(function() { //通过ready接口处理成功验证  
-			      // config信息验证成功后会执行ready方法  
-			  
-			      wx.onMenuShareAppMessage({ // 分享给朋友  ,在config里面填写需要使用的JS接口列表，然后这个方法才可以用   
-			        desc: fxData.desc, // 分享描述  
-			        title: fxData.title, // 分享标题  
-			        link: fxData.link,  
-			        imgUrl: fxData.imgUrl, // 分享图标  
-			        type: '', // 分享类型,music、video或link，不填默认为link  
-			        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空  
-			        success: function() {  
-			        // 用户确认分享后执行的回调函数  
-			        },  
-			        cancel: function() {  
-			        // 用户取消分享后执行的回调函数  
-			        }  
-			      });  
-			  
-			      wx.onMenuShareTimeline({ //分享朋友圈  
-			        title: fxData.title, // 分享标题  
-			        link: fxData.link,  
-			        imgUrl: fxData.imgUrl, // 分享图标  
-			        success: function() {  
-			        // 用户确认分享后执行的回调函数  
-			        },  
-			        cancel: function() {  
-			        // 用户取消分享后执行的回调函数  
-			        }  
-			      });  
-			  
-			      // 分享到QQ  
-			      wx.onMenuShareQQ({  
-			        title: fxData.title, // 分享标题  
-			        desc: fxData.desc, // 分享描述  
-			        link: fxData.link,  
-			        imgUrl: fxData.imgUrl, // 分享图标  
-			        success: function () {  
-			        // 用户确认分享后执行的回调函数  
-			        },  
-			        cancel: function () {  
-			        // 用户取消分享后执行的回调函数  
-			        }  
-			      });  
-			  
-			      // 分享到腾讯微博  
-			      wx.onMenuShareWeibo({  
-			        title: fxData.title, // 分享标题  
-			        desc: fxData.desc, // 分享描述  
-			        link: fxData.link,  
-			        imgUrl: fxData.imgUrl, // 分享图标  
-			        success: function () {  
-			        // 用户确认分享后执行的回调函数  
-			        },  
-			        cancel: function () {  
-			        // 用户取消分享后执行的回调函数  
-			        }  
-			      });  
-			  
-			      // 分享到QQ空间  
-			      wx.onMenuShareQZone({  
-			        title: fxData.title, // 分享标题  
-			        desc: fxData.desc, // 分享描述  
-			        link: fxData.link,  
-			        imgUrl: fxData.imgUrl, // 分享图标  
-			        success: function () {  
-			        // 用户确认分享后执行的回调函数  
-			        },  
-			        cancel: function () {  
-			        // 用户取消分享后执行的回调函数  
-			        }  
-			      });  
-			  
-			    });  
-			    wx.error(function(res){//通过error接口处理失败验证  
-			      // config信息验证失败会执行error函数  
-			    });  
-			    });  
 			}
 		}
 	}
@@ -211,7 +143,8 @@
 			width:50%;height: 6rem;line-height:6rem;background-size: contain;background-repeat: no-repeat;background-position: center;margin: 1rem 0;font-size: 1.25rem;
 		}
 		.recommend{margin-top: 2rem;width: 100%;height: 6rem;background-image: url(../../static/img/tuijian.png);background-position: center;background-size:contain;background-repeat: no-repeat;}
-		@media  screen  and (min-width: 414px) {
+
+		@media  screen  and (min-height: 812px) and (max-width: 375px) {
 			.section{width: 100%;}
 		}
 	}

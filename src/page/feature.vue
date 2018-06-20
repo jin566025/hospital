@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<my-swiper :listImg="swiperImg"></my-swiper>
+		<loading v-show="loadingShow"></loading>
+		<banner :listImg="swiperImg"></banner>
 		<div class="content clearfix">
 			<div class="section fl" v-for="(item,index) in list" @click="toList(item.name,item.id)">
 				<p class="type">{{ item.name }}</p>
@@ -14,12 +15,14 @@
 
 	
 <script>
-	import MySwiper from '../components/my-swiper'
+	import Banner from '../components/banner'
+	import Loading from '../components/loading'
 	export default{
 		data(){
 			return {
-				swiperImg:["../static/img/banner.png"],
-				list:[],			
+				swiperImg:["../static/img/bg3.jpg"],
+				list:[],	
+				loadingShow:true
 			}
 		},
 		created(){
@@ -27,9 +30,6 @@
 		},
 		methods:{
 			toList:function(name,id){
-				document.title = name;
-
-
 				this.$ajax({
 					type:"get",
 					url:this.url_path+"/getDepartmentInfo.json",
@@ -39,10 +39,13 @@
 					}
 				}).then((res)=>{
 					if(res){
+						
 						var data = res.data;
-						console.log(data)
-						if(data.openway==1){
+						console.log(res)
+						if(data.openway==1 && data.outUrl!==""){
 							window.location.href=data.outUrl+"&scene=4#wechat_redirect"
+						}else{
+							alert("暂无")
 						}
 					}
 					
@@ -57,6 +60,7 @@
 					dataType:"json"
 				}).then((res)=>{
 			 		if(res){
+			 			this.loadingShow = false;
 			 			var data = res.data;
 			 			this.list = data.list;
 			 			console.log(data)
@@ -65,7 +69,8 @@
 			}
 		},
 		components:{
-			MySwiper
+			Banner,
+			Loading
 		}
 	}
 </script>

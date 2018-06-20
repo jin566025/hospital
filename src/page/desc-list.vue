@@ -1,35 +1,44 @@
 <template>
 	<div>
-		<div class="section" v-for="(item,index) in list" @click="toDetail(item.id)">
-			<div class="section-content flex-box">
-				<img  :onerror="errorImg01" class="section-left" :src="item.headImg ? imgurl+item.headImg:'./static/img/circle4.png'"  />
-				<div class="section-right">
-					<p class="section-p2">
-						
-						<a class="name">{{ item.name }}</a>
-						<a>{{ item.job }}</a>
-					</p>
-					<p class="section-p">
-						<a>科室：</a>
-						<a>{{ item.department }}</a>
-					</p>
-					<p class="section-p">
-						<a>门诊时间：</a>
-						<a>{{ item.outpatientTime }}</a>
-					</p>
+		<loading v-show="loadingShow"></loading>
+		<div v-if="hasdata">
+			<div class="section" v-for="(item,index) in list" @click="toDetail(item.id)" >
+				<div class="section-content flex-box">
+					<img  :onerror="errorImg01" class="section-left" :src="item.headImg ? imgurl+item.headImg:'./static/img/circle4.png'"  />
+					<div class="section-right">
+						<p class="section-p2">
+							
+							<a class="name">{{ item.name }}</a>
+							<a>{{ item.job }}</a>
+						</p>
+						<p class="section-p">
+							<a>科室：</a>
+							<a>{{ item.department }}</a>
+						</p>
+						<p class="section-p">
+							<a>门诊时间：</a>
+							<a>{{ item.outpatientTime }}</a>
+						</p>
+					</div>
+					
 				</div>
 			</div>
 		</div>
-		
+		<div v-else>
+			<p class="nodata">暂无</p>
+		</div>
 	</div>
 </template>
 
 <script>
+	import Loading from '../components/loading'
 	export default{
 		data(){
 			return {
 				list:[],
-				errorImg01: 'this.onerror=null;this.src="./static/img/circle4.png"'
+				errorImg01: 'this.onerror=null;this.src="./static/img/circle4.png"',
+				loadingShow:true,
+				hasdata:true
 			}
 		},
 		created(){
@@ -50,15 +59,24 @@
 					dataType:"json"
 				}).then((res)=>{
 					console.log(res)
-					if(res){
-			 			var data = res.data;
-			 			this.list = data.list;
+					this.loadingShow = false;
+					var data = res.data;
+			 		this.list = data.list;
+					if(this.list.length==0){
+						this.hasdata = false;
+			 		}else{
+			 			this.hasdata = true;
+			 			
 			 		}
+			 		
 				})
 			}
 		},
 		watch:{
 			 "$route": "getDoctorList"
+		},
+		components:{
+			Loading
 		}
 	}
 </script>
@@ -81,4 +99,5 @@
 	}
 	
 }
+.nodata{text-align: center;height: 3rem;line-height: 3rem;font-size: 1.2rem;border-bottom: 1px solid gainsboro;}
 </style>

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <title>首页</title>
-    <link rel="icon" href="static/img/ico.ico" type="image/x-icon">
+    <link rel="icon" href="./static/img/favicon.ico" type="image/x-icon">
     <style type="text/css">
         .info-title {color: #000000;font-size: 14px;background-color:#FFFFFF;line-height: 26px;padding: 3px 0 3px 6px;letter-spacing: 1px;border-bottom: 1px solid gainsboro;font-weight: bold;}
         .info-content {font: 12px Helvetica, 'Hiragino Sans GB', 'Microsoft Yahei', '微软雅黑', Arial;padding: 4px;color: #666666;line-height: 23px;padding-left: 6px;}
@@ -14,5 +14,24 @@
   <body>
     <div id="app"></div>
     <!-- built files will be auto injected -->
+    
+    <script type="text/javascript">
+        //微信浏览器中，aler弹框不显示域名
+        (function(){
+            //先判断是否为微信浏览器
+            var ua = window.navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+                //重写alert方法，alert()方法重写，不能传多余参数
+                window.alert = function(name){
+                    var iframe = document.createElement("IFRAME");
+                    iframe.style.display="none";
+                    iframe.setAttribute("src", 'data:text/plain');
+                    document.documentElement.appendChild(iframe);
+                    window.frames[0].window.alert(name);
+                    iframe.parentNode.removeChild(iframe);
+                }
+            }
+        })();
+    </script>
   </body>
 </html>

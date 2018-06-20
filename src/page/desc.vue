@@ -1,28 +1,31 @@
 <template>
 	<div>
-		<my-swiper :listImg="swiperImg"></my-swiper>
+		<loading v-show="loadingShow"></loading>
+		<!--<my-swiper :listImg="swiperImg"></my-swiper>-->
+		<banner :listImg="swiperImg"></banner>
 		<div class="content clearfix">
 			<div class="section fl" v-for="(item,index) in list" @click="toList(item.name,item.id)">
 				<p class="type">{{ item.name }}</p>
 			</div>
-
 		</div>
-		
 	</div>
 </template>
 
 	
 <script>
-	import MySwiper from '../components/my-swiper'
+	import Banner from '../components/banner'
+	import Loading from '../components/loading'
 	export default{
 		data(){
 			return {
-				swiperImg:["../static/img/banner.png"],
+				swiperImg:["../static/img/bg1.jpg"],
 				list:[],
+				loadingShow:true
 			}
 		},
 		created(){
 			this.getDepartmentTypeForDoctorList();
+			
 		},
 		methods:{
 			toList:function(name,id){
@@ -36,6 +39,7 @@
 					dataType:"json"
 				}).then((res)=>{
 			 		if(res){
+			 			this.loadingShow = false;
 			 			var data = res.data;
 			 			this.list = data.list;
 
@@ -45,7 +49,8 @@
 			
 		},
 		components:{
-			MySwiper
+			Banner,
+			Loading
 		}
 	}
 </script>

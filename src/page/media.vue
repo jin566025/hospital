@@ -1,6 +1,7 @@
 <template>
 	<div>
-		<my-swiper :listImg="swiperImg"></my-swiper>
+		<loading v-show="loadingShow"></loading>
+		<banner :listImg="swiperImg"></banner>
 		<div class="section" @click="toDetail(item.id)" v-for="(item,index) in MaterialList">
 			<div class="section-content  flex-box">
 				<div class="section-left">
@@ -19,15 +20,17 @@
 
 
 <script>
-	import MySwiper from '../components/my-swiper'
+	import Banner from '../components/banner'
+	import Loading from '../components/loading'
 	export default{
 		data(){
 			return {
-				swiperImg:["../static/img/banner.png"],
+				swiperImg:["../static/img/bg7.jpg"],
 				MaterialList:[
 //					{title:"这是测试的title",summary:"这是测试的summary",img:""}
 				],
-				errorImg01: 'this.onerror=null;this.src="./static/img/morentupian.png"'
+				errorImg01: 'this.onerror=null;this.src="./static/img/morentupian.png"',
+				loadingShow:true
 			}
 		},
 		methods:{
@@ -41,6 +44,7 @@
 					},
 					url:this.url_path+"/getMaterialList.json"
 				}).then((res)=>{
+					this.loadingShow = false;
 					var data = res.data;
 					this.MaterialList = data.list;
 					console.log(this.MaterialList)
@@ -48,11 +52,12 @@
 			}
 		},
 		components:{
-			MySwiper
+			Banner,
+			Loading
 		},
 		created(){
-			this.getMaterialList()
-		},
+			this.getMaterialList();
+		}
 	}
 </script>
 <style lang="less" rel="stylesheet/less" scoped>

@@ -15,7 +15,7 @@ Vue.config.productionTip = false
 
 Vue.prototype.$ajax = axios
 Vue.prototype.url_path = "http://longhuaweb.nbjiakai.com:8484/LongHua/rest"
-Vue.prototype.imgurl = "http://longhuaweb.nbjiakai.com:8484"
+Vue.prototype.imgurl = "http://longhuaweb.nbjiakai.com:8484/"
 Vue.prototype.toDetail = function(id){
 	this.$ajax({
 		type:"post",
@@ -26,9 +26,7 @@ Vue.prototype.toDetail = function(id){
 		dataType:"json",
 	}).then((res)=>{
 		if(res){
-			
 			var data = res.data;
-			console.log(data.outUrl)
 			if(data.openway){
 				var urls = data.outUrl;
 				var strs = "mp.weixin.qq.com";
@@ -42,6 +40,26 @@ Vue.prototype.toDetail = function(id){
 		}
 	})
 }
+//Vue.prototype.getAdList = function(position,max){
+//	var param = {};
+//	param.position = position;
+//	if(max){
+//		param.max = max;
+//	}
+//	this.$ajax({
+//		type:"post",
+//		url:this.url_path+"/getAdList.json",
+//		dataType:"json",
+//		params:param,
+//	}).then((res)=>{
+//		console.log(res)
+//		if(res.data.stateCode==0){
+//			console.log(position)
+//			var data = res.data;
+//			this.swiperImg = data.list;
+//		}
+//	})
+//}
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

@@ -34,6 +34,7 @@ export default new Router({
     {
       path: '/index',
       component: Index,
+      
       meta: {
         title: '首页'
       }
@@ -41,6 +42,7 @@ export default new Router({
     {
       path: '/survey',
       component: Survey,
+      hidden: true,
       meta: {
         title: '医院概况'
       }
@@ -48,6 +50,7 @@ export default new Router({
     {
       path: '/outpatient',
       component: Outpatient,
+      hidden: true,
       meta: {
         title: '门诊信息'
       }
@@ -55,6 +58,7 @@ export default new Router({
     {
       path: '/desc',
       component: Desc,
+      hidden: true,
       meta: {
         title: '专家介绍'
       }
@@ -62,16 +66,19 @@ export default new Router({
     {
   		path: '/desc-detail',
   		component: DescDetail,
+  		hidden: true,
   		meta: {
         title: '专家介绍'
       }
   	},
   	{
   		path: '/desc-list',
+  		hidden: true,
   		component: DescList
   	},
   	{
   		path: '/guide',
+  		hidden: true,
   		component: Guide,
   		meta: {
         title: '就医指南'
@@ -79,6 +86,7 @@ export default new Router({
   	},
   	{
   		path: '/stop',
+  		hidden: true,
   		component: Stop,
   		meta: {
         title: '停诊信息'
@@ -86,6 +94,7 @@ export default new Router({
   	},
   	{
   		path: '/stop-detail',
+  		hidden: true,
   		component: StopDetail,
   		meta: {
         title: '停诊信息'
@@ -93,6 +102,7 @@ export default new Router({
   	},
   	{
   		path: '/lecture',
+  		hidden: true,
   		component: Lecture,
   		meta: {
         title: '名医讲堂'
@@ -100,6 +110,7 @@ export default new Router({
   	},
   	{
   		path: '/lecture-detail',
+  		hidden: true,
   		component: LectureDetail,
   		meta: {
         title: '名医讲堂详情'
@@ -107,6 +118,7 @@ export default new Router({
   	},
   	{
   		path: '/recruit',
+  		hidden: true,
   		component: Recruit,
   		meta: {
         title: '招聘启示'
@@ -114,6 +126,7 @@ export default new Router({
   	},
   	{
   		path: '/recruit-detail',
+  		hidden: true,
   		component: RecruitDetail,
   		meta: {
         title: '招聘启示详情'
@@ -121,6 +134,7 @@ export default new Router({
   	},
   	{
   		path: '/media',
+  		hidden: true,
   		component: Media,
   		meta: {
         title: '媒体视角'
@@ -128,6 +142,7 @@ export default new Router({
   	},
   	{
   		path: '/media-detail',
+  		hidden: true,
   		component: MediaDetail,
   		meta: {
         title: '媒体视角详情'
@@ -135,6 +150,7 @@ export default new Router({
   	},
   	{
   		path: '/feature',
+  		hidden: true,
   		component:Feature,
   		meta: {
         title: '科室特色'
@@ -142,6 +158,7 @@ export default new Router({
   	},
   	{
   		path: '/feature-detail',
+  		hidden: true,
   		component: FeatureDetail,
   		meta: {
         title: '科室特色'
@@ -150,6 +167,7 @@ export default new Router({
 
   	{
   		path: '/news',
+  		hidden: true,
   		component: News,
   		meta: {
         title: '新闻中心'
@@ -157,6 +175,7 @@ export default new Router({
   	},
   	{
   		path: '/news-detail',
+  		hidden: true,
   		component: NewsDetail,
   		meta: {
         title: '新闻中心详情s'

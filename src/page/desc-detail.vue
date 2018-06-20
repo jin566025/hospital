@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<loading v-show="loadingShow"></loading>
 		<div class="section">
 			<div class="section-content flex-box">
 				<img class="section-left" :onerror="errorImg01" :src="imgurl+doctorInfo.headImg" />
@@ -31,11 +32,13 @@
 </template>
 
 <script>
+	import Loading from '../components/loading'
 	export default{
 		data(){
 			return{
 				doctorInfo:{},
-				errorImg01: 'this.onerror=null;this.src="./static/img/circle4.png"'
+				errorImg01: 'this.onerror=null;this.src="./static/img/circle4.png"',
+				loadingShow:true
 			}
 		},
 		created(){
@@ -55,7 +58,7 @@
 				}).then((res)=>{
 			 		console.log(res)
 			 		this.doctorInfo = res.data;
-			 		
+			 		this.loadingShow = false;
 			 		this.$nextTick(function () {
 				       var texts = document.getElementById("content-p");
 				       var texts2 = document.getElementById("content-p2");
@@ -79,6 +82,9 @@
 		},
 		watch:{
 			 "$route": "getDoctorInfo"
+		},
+		components:{
+			Loading
 		}
 	}
 </script>
@@ -87,7 +93,7 @@
 <style  lang="less" rel="stylesheet/less" scoped>
 .text-over{text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 .section{
-	width: 100%;border-bottom: 1px solid gainsboro;padding: 0.2rem 0;
+	width: 100%;border-bottom: 1px solid gainsboro;padding: 0.5rem 0;
 	.section-content{
 		width: 90%;margin: 0 auto;align-items: center;
 		.section-left{width: 6rem;height: 6rem;border-radius: 5px;}

@@ -28,7 +28,7 @@ export default new Router({
       path: '/',
       component: Index,
       meta: {
-        title: '首页'
+        title: '上海龙华医院宁波分院'
       }
     },
     {
@@ -36,7 +36,7 @@ export default new Router({
       component: Index,
       
       meta: {
-        title: '首页'
+        title: '上海龙华医院宁波分院'
       }
     },
     {

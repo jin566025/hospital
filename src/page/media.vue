@@ -3,7 +3,7 @@
 		<loading v-show="loadingShow"></loading>
 		<banner :listImg="swiperImg"></banner>
 		<div class="section" @click="toDetail(item.id)" v-for="(item,index) in MaterialList">
-			<div class="section-content  flex-box">
+			<div class="section-content">
 				<div class="section-left">
 					<div class="head">
 						<img class="headimg" :src="item.img ? imgurl+item.img:'./static/img/morentupian.png'" :onerror="errorImg01" />
@@ -62,18 +62,18 @@
 </script>
 <style lang="less" rel="stylesheet/less" scoped>
 .section{
-	width: 100%;padding: 1rem 0;border-bottom: 1px solid gainsboro;
+	width: 100%;padding:2rem 0;border-bottom: 1px solid gainsboro;
 	.section-content{
-		width: 90%;margin: 0 auto;align-items: center;
+		width: 90%;margin: 0 auto;align-items: center;position: relative;
 		.section-left{
-			width: 8rem;height:8rem;background: url(../../static/img/keshitese.png) no-repeat center/contain;position: relative;
+			width: 8rem;height:8rem;background: url(../../static/img/keshitese.png) no-repeat center/contain;position: absolute;left: 0;top: -1.5rem;
 			.head{
 				width:5.4rem;height:3.4rem;position: absolute;left: 1rem;bottom: 1.4rem;
 				.headimg{height: 3.4rem;margin: 0 auto;display: block;}
 			}
 		}
 		.section-right{
-			width: calc(100% - 8rem);padding-left: 0.4rem;
+			padding-left: 8.4rem;
 			.title{height: 2.4rem;line-height: 2.4rem;color: #000000;font-size: 1.2rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 			.detail{color: gray;font-size: 1rem;height: 3rem;overflow: hidden;line-height: 1.5rem;text-overflow: ellipsis;
 			display: -webkit-box;-webkit-box-orient: vertical;-webkit-line-clamp: 2;}

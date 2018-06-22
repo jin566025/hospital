@@ -3,7 +3,7 @@
 		<loading v-show="loadingShow"></loading>
 		<div v-if="hasdata">
 			<div class="section" v-for="(item,index) in list" @click="toDetail(item.id)" >
-				<div class="section-content flex-box">
+				<div class="section-content">
 					<img  :onerror="errorImg01" class="section-left" :src="item.headImg ? imgurl+item.headImg:'./static/img/circle4.png'"  />
 					<div class="section-right">
 						<p class="section-p2">
@@ -85,10 +85,10 @@
 .section{
 	width: 100%;border-bottom: 1px solid gainsboro;padding: 1rem 0;
 	.section-content{
-		width: 90%;margin: 0 auto;align-items: center;
-		.section-left{width: 6rem;height: 6rem;border-radius: 5px;}
+		width: 90%;margin: 0 auto;align-items: center;position:relative;
+		.section-left{width: 6rem;height: 6rem;border-radius: 5px;position: absolute;left: 0;}
 		.section-right{
-			padding-left: 1.5rem;color: gray;font-size: 1rem;width: calc(100% - 6rem);
+			padding-left: 7.5rem;color: gray;font-size: 1rem;overflow: hidden;
 			.section-p{height:1.6rem;line-height:1.6rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
 			.section-p2 {
 				height:2.8rem;line-height:2.8rem;text-overflow: ellipsis;overflow: hidden;white-space: nowrap;

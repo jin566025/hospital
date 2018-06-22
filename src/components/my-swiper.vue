@@ -1,17 +1,20 @@
 <template>
-	<div class="swiper-container" id="swiper1">
-	    <div class="swiper-wrapper">
-		    <div class="swiper-slide" v-for="(item,index) in listImg">
-		      <img  :onerror="errorImg01" :src="item.imgUrl ? imgurl+item.imgUrl:'./static/img/banner.png'">
-		    </div>
+
+	<div class="device">
+	    <div class="swiper-container">
+	      <div class="swiper-wrapper">
+	        <div class="swiper-slide"  v-for="(item,index) in listImg">  
+	        	<img  :onerror="errorImg01" :src="item.imgUrl ? imgurl+item.imgUrl:'./static/img/banner.png'">
+	        </div>
+	
+	      </div>
 	    </div>
-    	<div class="swiper-pagination"></div>
-  	</div>
+	    <div class="pagination"></div>
+	</div>
 </template>
 
 <script>
-  import Swiper from 'swiper';
-
+  import Swiper from '../../static/js/idangerous.swiper.min.js';
   
   export default {
     props: ['listImg'],
@@ -21,24 +24,36 @@
 		}
 	},
     mounted() {
-      var swiper = new Swiper('.swiper-container', {
-        pagination: '.swiper-pagination',
-        paginationClickable: true,
-		autoplay : 2500,
-		autoplayDisableOnInteraction : false,
-        speed: 600,
-        observer:true,//修改swiper自己或子元素时，自动初始化swiper
-        observeParents:true,//修改swiper的父元素时，自动初始化swiper
+    	var that = this;
+    	setTimeout(function(){
+    		that.createSwiper();
+    	},500)
 
-      });
+    },
+    methods:{
+    	createSwiper:function(){
+    		console.log("bbb")
+    		var swiper = new Swiper('.swiper-container', {  
+				updateOnImagesReady : true,
+			    pagination: '.pagination',
+			    loop:true,
+			    grabCursor: true,
+			    paginationClickable: true,
+			    observer:true, //修改swiper自己或子元素时，自动初始化swiper
+	        	observeParents:true,//修改swiper的父元素时，自动初始化swiper
+			    onInit: function(swiper){
+			      console.log('aaaa');
+			    }
+     		}) 
+    	}
     }
   }
 </script>
 <style scoped>
-  @import url("../../static/css/swiper.min.css");
-  .swiper-container {
+.device{position: relative;}
+ .swiper-container {
     width: 100%;
-    height:100%;
+    height:12rem;
     background-color: #E5EBF4;
   }
   .swiper-wrapper {
@@ -55,6 +70,5 @@
   .swiper-slide img{
     width: 100%;
   }
-  
- 
+  .pagination{position: absolute;bottom:20px;text-align: center;width:100%;z-index: 100;}
 </style>

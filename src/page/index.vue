@@ -1,7 +1,7 @@
 <template>
 	<div class="content">
 		<my-swiper :listImg="swiperImg"></my-swiper>
-    	<div class="container flex-box">
+    	<div class="container clearfix">
     		<div @click="toSurvey()" class="section" style="background-image: url(./static/img/home1.png);"></div>
     		<div @click="toOutpatient()" class="section" style="background-image: url(./static/img/home2.png);"></div>
     		
@@ -26,7 +26,7 @@
 	export default {
 		data(){
 			return {
-				swiperImg:["../static/img/banner.png"],
+				swiperImg:[],
 				sectionBg:[
 //					{bgImg:"./static/img/home1.png",path:"/survey"},
 //					{bgImg:"./static/img/home2.png",path:"/outpatient"},
@@ -61,7 +61,7 @@
 	    			}
 	    		}).then((res)=>{
 	    			if(res.data.stateCode==0){
-	    				console.log(res)
+	    				
 	    				var data = res.data;
 	    				this.swiperImg = data.list;
 	    			}
@@ -138,11 +138,11 @@
 .content{
 	height: 100%;
 	.container{
-		flex-flow:wrap;background-color:#E5EBF4;padding:1rem 10%;
+		background-color:#E5EBF4;padding:1rem 10%;
 		.section{
-			width:50%;height: 6rem;line-height:6rem;background-size: contain;background-repeat: no-repeat;background-position: center;margin: 1rem 0;font-size: 1.25rem;
+			float: left;width:50%;height: 6rem;line-height:6rem;background-size: contain;background-repeat: no-repeat;background-position: center;margin: 1rem 0;font-size: 1.25rem;
 		}
-		.recommend{margin-top: 2rem;width: 100%;height: 6rem;background-image: url(../../static/img/tuijian.png);background-position: center;background-size:contain;background-repeat: no-repeat;}
+		.recommend{float: left;margin-top: 2rem;width: 100%;height: 6rem;background-image: url(../../static/img/tuijian.png);background-position: center;background-size:contain;background-repeat: no-repeat;}
 
 		@media  screen  and (min-height: 812px) and (max-width: 375px) {
 			.section{width: 100%;}

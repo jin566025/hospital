@@ -14,8 +14,8 @@
 @import url("../static/css/common.css");
 @import url("../static/css/font-awesome.min.css");
 #app{overflow-x: hidden;height: 100%;z-index: 1;width: 100%;position:absolute;}
-.swiper-pagination-bullet{width: 0.8rem;height:0.8rem;background-color: #FFFFFF;border-radius: 50%;display: inline-block;margin: 0 5px;}
-.swiper-pagination-bullet-active{background-color: dodgerblue;}
+.swiper-pagination-switch{width: 0.8rem;height:0.8rem;background-color: #FFFFFF;border-radius: 50%;display: inline-block;margin: 0 5px;}
+.swiper-active-switch{background-color: dodgerblue;}
 </style>
 <script>
 		import BScroll from 'better-scroll'
